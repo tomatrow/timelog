@@ -22,8 +22,8 @@ o/out     - clock out of project
 p/project - specify project for clocking  
 n/note    - add note to clocking  
 
-Used code from [`t`](https://github.com/nuex/t) by nuex
-
+### Acknowledgments:
+Used `sed`/`awk` expresions from [`t`](https://github.com/nuex/t) by nuex
 
 ### Installation:
 
