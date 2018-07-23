@@ -122,7 +122,8 @@ function timelog -d 'Logs time in a ledger readable format.'
 
     ##### The Main Portion
 
-    argparse --exclusive 'h,b,l,e,v,i,o,a,r' --name='timelog'\
+    # the main commands are exclusive, then we make sure p/n are only called with i/o
+    argparse --exclusive 'h,l,e,v,c,f,a,r,b,i,o' --exclusive 'h,l,e,v,c,f,a,r,b,p' --exclusive 'h,l,e,v,c,f,a,r,b,n' --name='timelog'\
     'h/help'\
     'l/list'\
     'e/edit'\
