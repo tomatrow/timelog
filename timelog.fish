@@ -57,7 +57,8 @@ function timelog -d 'Logs time in a ledger readable format.'
         project - specify project for clocking
         note    - add note to clocking
 
-        Used code from [`t`](https://github.com/nuex/t) by nuex\
+        ### Acknowledgments
+        Used `sed`/`awk` expresions from [`t`](https://github.com/nuex/t) by nuex\
         """
     end
 
