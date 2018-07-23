@@ -31,16 +31,6 @@ function timelog -d 'Logs time in a ledger readable format.'
         ledger -f "$logfile" $argv
     end
 
-    # used in `timelog --balance='PERIOD'`
-    function check_balance -S
-        contains "$_flag_value" 'day' 'week' 'month' 'year'
-        or return 11
-    end
-
-    function is_blank -a word
-        string match -r '\s*' "$word"
-    end
-
     ##### Commands
 
     # Shows some helpful hints
@@ -52,7 +42,7 @@ function timelog -d 'Logs time in a ledger readable format.'
 
         ### Commands:
         help    - show this help
-        balance - show balance for the day, month, or year
+        balance - show balance via ledger
         list    - list all projects
         edit    - edit in terminal editor
         visual  - edit in visual editor
@@ -69,11 +59,8 @@ function timelog -d 'Logs time in a ledger readable format.'
         """
     end
 
-    function show_balance -S -a interval
-        if is_blank "$interval"
-            set interval 'day'
-        end
-        call balance -p "this $interval"
+    function show_balance -S
+        call balance "$argv"
     end
 
     function show_list -S
@@ -141,7 +128,7 @@ function timelog -d 'Logs time in a ledger readable format.'
     'f/file'\
     'a/active'\
     'r/recent'\
-    'b/balance=?!check_balance'\
+    'b/balance=?'\
     'i/in'\
     'o/out'\
     'p/project='\
@@ -156,7 +143,6 @@ function timelog -d 'Logs time in a ledger readable format.'
         echo "$HOME/.journal.timeclock"
     end | read logfile
 
-    #
     if exists 'help'
         show_help
     else if exists 'list'
@@ -174,7 +160,7 @@ function timelog -d 'Logs time in a ledger readable format.'
     else if exists 'recent'
         show_recent
     else if exists 'balance'
-        show_balance "$_flag_balance"
+        show_balance $argv
     else
         # we are clocking in|out
         if exists 'in'
