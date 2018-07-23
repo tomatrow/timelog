@@ -38,7 +38,9 @@ function timelog -d 'Logs time in a ledger readable format.'
         echo -n \
         """\
         ### Usage:
-        `timelog --in|out --project='general:specific' --note='Starting/Stopping for a time'`
+        `timelog --in --project='general:specific' --note='Starting for a time'`
+        `timelog --out --project='general:specific' --note='Stopping for a time'`
+        `timelog -b -- -p 'since today`
 
         ### Commands:
         help    - show this help
