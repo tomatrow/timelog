@@ -71,7 +71,7 @@ function timelog -d 'Logs time in a ledger readable format.'
     end
 
     function show_recent -S
-         sed -ne '/^o/{g;p;};h;' (show_file) | tail -n 1 | extract_project
+        sed -ne '/^o/{g;p;};h;' (show_file) | tail -n 1 | extract_project
     end
 
     # Covers --in, --out, --project, and --note
