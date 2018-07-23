@@ -25,4 +25,6 @@ Used code from [`t`](https://github.com/nuex/t) by nuex
 
 ### Installation:
 
-Clone and move `timelog.fish` into your fish function directory at `~/.config/fish/functions/`. 
+Clone and move `timelog.fish` into your fish function directory at `~/.config/fish/functions/`.
+
+For completions, add `completions.fish` with the name `timelog.fish` to `.config/fish/completions`
