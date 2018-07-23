@@ -7,20 +7,19 @@ A time sheet that leverages ledger.
 `timelog -b -- -p 'since today`
 
 ### Commands:
-
-h/help    - show this help  
-b/balance - show balance for the day, month, or year  
-l/list    - list all projects  
-e/edit    - edit in terminal editor  
-v/visual  - edit in visual editor  
-c/cat     - cat timelog file  
-f/file    - show timelog file name  
-a/active  - show active project  
-r/recent  - show most recently closed project  
-i/in      - clock into project or last project  
-o/out     - clock out of project  
-p/project - specify project for clocking  
-n/note    - add note to clocking  
+help    - show this help  
+balance - show balance via ledger  
+list    - list all projects  
+edit    - edit in terminal editor  
+visual  - edit in visual editor  
+cat     - cat timelog file  
+file    - show timelog file name  
+active  - show active project  
+recent  - show most recently closed   project  
+in      - clock into project or last   project  
+out     - clock out of project  
+project - specify project for clocking  
+note    - add note to clocking  
 
 ### Acknowledgments:
 Used `sed`/`awk` expresions from [`t`](https://github.com/nuex/t) by nuex
