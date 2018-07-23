@@ -62,26 +62,6 @@ function timelog -d 'Logs time in a ledger readable format.'
         """
     end
 
-    function show_balance -S
-        call balance "$argv"
-    end
-
-    function show_list -S
-        call accounts
-    end
-
-    function edit_timelog -S
-        eval "$EDITOR $logfile"
-    end
-
-    function visual_timelog -S
-        eval "$VISUAL $logfile"
-    end
-
-    function cat_timelog -S
-        cat "$logfile"
-    end
-
     function show_file -S
         echo "$logfile"
     end
@@ -132,7 +112,7 @@ function timelog -d 'Logs time in a ledger readable format.'
     'f/file'\
     'a/active'\
     'r/recent'\
-    'b/balance=?'\
+    'b/balance'\
     'i/in'\
     'o/out'\
     'p/project='\
@@ -150,13 +130,13 @@ function timelog -d 'Logs time in a ledger readable format.'
     if exists 'help'
         show_help
     else if exists 'list'
-        show_list
+        call accounts
     else if exists 'edit'
-        edit_timelog
+        eval "$EDITOR $logfile"
     else if exists 'visual'
-        visual_timelog
+        eval "$VISUAL $logfile"
     else if exists 'cat'
-        cat_timelog
+        cat "$logfile"
     else if exists 'file'
         show_file
     else if exists 'active'
@@ -164,7 +144,7 @@ function timelog -d 'Logs time in a ledger readable format.'
     else if exists 'recent'
         show_recent
     else if exists 'balance'
-        show_balance $argv
+        call balance $argv
     else
         # we are clocking in|out
         if exists 'in'
