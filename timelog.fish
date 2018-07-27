@@ -58,6 +58,7 @@ function timelog -d 'Logs time in a ledger readable format.'
         file    - show timelog file name
         active  - show active project
         recent  - show most recently closed project
+        switch  - move to a new project instantly
         in      - clock into project or last project
         out     - clock out of project
         project - specify project for clocking
@@ -108,8 +109,8 @@ function timelog -d 'Logs time in a ledger readable format.'
 
     ##### The Main Portion
 
-    # the main commands are exclusive, then we make sure p/n are only called with i/o
-    argparse --exclusive 'h,l,e,v,c,f,a,r,b,i,o' --exclusive 'h,l,e,v,c,f,a,r,b,p' --exclusive 'h,l,e,v,c,f,a,r,b,n' --name='timelog'\
+    # the main commands are exclusive, then we make sure p/n are only called with i/o/s
+    argparse --exclusive 'h,l,e,v,c,f,a,r,b,s,i,o' --exclusive 'h,l,e,v,c,f,a,r,b,p' --exclusive 'h,l,e,v,c,f,a,r,b,n' --name='timelog'\
     'h/help'\
     'l/list'\
     'e/edit'\
@@ -119,6 +120,7 @@ function timelog -d 'Logs time in a ledger readable format.'
     'a/active'\
     'r/recent'\
     'b/balance'\
+    's/switch' \
     'i/in'\
     'o/out'\
     'p/project='\
@@ -151,6 +153,15 @@ function timelog -d 'Logs time in a ledger readable format.'
         show_recent
     else if exists 'balance'
         call balance $argv
+    else if exists 'switch'
+        set -l active (show_active)
+        if test '' = "$active"
+            return 55 # we are not clocked in
+        end
+        clock 'o' '' '' | read -l outlog; or return 66
+        clock 'i' "$_flag_project" "$_flag_note" | read -l inlog; or return 77
+        send_log "$outlog"
+        send_log "$inlog"
     else
         # we are clocking in|out
         if exists 'in'
