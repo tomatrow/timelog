@@ -31,6 +31,12 @@ function timelog -d 'Logs time in a ledger readable format.'
         ledger -f "$logfile" $argv
     end
 
+    # send output to terminal and the logfile
+    function send_log -S
+        echo "$argv"
+        echo "$argv" >> "$logfile"
+    end
+
     ##### Commands
 
     # Shows some helpful hints
