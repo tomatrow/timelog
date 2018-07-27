@@ -173,11 +173,9 @@ function timelog -d 'Logs time in a ledger readable format.'
         end | read punch
 
         # Construct ledger line
-        clock "$punch" "$_flag_project" "$_flag_note" | read -l output
+        clock "$punch" "$_flag_project" "$_flag_note" | read -l transaction
         or return $status
 
-        # Send outputs
-        echo "$output" >> "$logfile"
-        echo "$output"
+        send_log "$transaction"
     end
 end
