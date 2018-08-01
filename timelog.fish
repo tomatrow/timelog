@@ -94,7 +94,7 @@ function timelog -d 'Logs time in a ledger readable format.'
                 show_active
             case 'i'
                 # string match -q -r '\w*' (show_active); and return 77 # return if it's just whitespace
-                show_recent # # no active project, bad
+                show_recent
             end | read project
             test -z "$project"; and return 66 # no last project
         end
