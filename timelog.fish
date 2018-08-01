@@ -89,10 +89,13 @@ function timelog -d 'Logs time in a ledger readable format.'
 
         # Assign default projects
         if test -z "$project"
-            switch "$punch"
-            case 'o'
-                show_active
-            case 'i'
+            if test "$punch" = 'o'
+                set -l active (show_active)
+                if test '' = "$active"
+                    return 55 # we are not clocked in
+                end
+                echo "$active"
+            else
                 # string match -q -r '\w*' (show_active); and return 77 # return if it's just whitespace
                 show_recent
             end | read project
