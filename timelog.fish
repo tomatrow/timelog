@@ -116,7 +116,8 @@ function timelog -d 'Logs time in a ledger readable format.'
                 echo 'into'
             else
                 echo 'out of'
-            end | read verb; and tweet "Clocking $verb $project\n$note"
+            end | read verb
+            tweet "Clocking $verb $project\n$note"
         end
 
         # The two spaces between project and tailing are required
