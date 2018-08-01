@@ -108,7 +108,10 @@ function timelog -d 'Logs time in a ledger readable format.'
         end
 
         if test -n "$note"
+            # Set the log comment
             set tailing "  // $note"
+
+            # post notes to twitter
             if test "$punch" = 'i'
                 echo 'into'
             else
