@@ -37,6 +37,11 @@ function timelog -d 'Logs time in a ledger readable format.'
         echo "$argv" >> "$logfile"
     end
 
+    # output to twitter
+    function tweet -S -a words
+        eval "$tweet_sh post '$words'" > /dev/null; or return 99
+    end
+
     ##### Commands
 
     # Shows some helpful hints
@@ -104,6 +109,11 @@ function timelog -d 'Logs time in a ledger readable format.'
 
         if test -n "$note"
             set tailing "  // $note"
+            if test "$punch" = 'i'
+                echo 'into'
+            else
+                echo 'out of'
+            end | read verb; and tweet "Clocking $verb $project\n$note"
         end
 
         # The two spaces between project and tailing are required
@@ -137,6 +147,13 @@ function timelog -d 'Logs time in a ledger readable format.'
     else
         echo "$HOME/.journal.timeclock"
     end | read logfile
+
+    if not set -q TIMELOG_TWEET_SH
+        echo "Need tweet.sh location set as 'TIMELOG_TWEET_SH'" > /dev/stderr
+        return 111
+    else
+        set tweet_sh "$TIMELOG_TWEET_SH"
+    end
 
     if exists 'help'
         show_help
