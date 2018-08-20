@@ -39,7 +39,8 @@ function timelog -d 'Logs time in a ledger readable format.'
 
     # output to twitter
     function tweet -S -a words
-        eval "$tweet_sh post '$words' &" > /dev/null; or return 99
+        set script (string join ' ' "$tweet_sh" 'post' -- '-l' "\"$words\"")
+        eval "$script" > /dev/null &
     end
 
     ##### Commands
