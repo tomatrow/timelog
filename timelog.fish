@@ -1,5 +1,5 @@
 # Author: AJ (tomatrow) Caldwell
-# https://tomatrow.github.io
+# https://ajcaldwell.xyz
 
 function timelog -d 'Logs time in a ledger readable format.'
 
